@@ -74,12 +74,13 @@ const tile = [
     'westy "desk boom"',
     'westy kill with engie crits',
     'alex is "balling"',
-    'alex insists he\'s cooling',
+    'alex "i\'m cooling brah"',
     'alex "duuuude"',
     'alex "put me on demo"',
     'alex "ain\'t no way"',
     'alex talks about jazz',
     'alex repeats a joke nonstop',
+    'alex complains about playing medic',
     'mitty switches to original',
     'mitty unstable internet',
     'mitty "we\'re (so) back"',
@@ -94,6 +95,7 @@ const tile = [
     'remedy gets loud',
     'remedy mentions dragon ball',
     'remedy sacs while mitty is sacing',
+    'remedy "i\'m going nuts"',
 ];
 /**
  * Create a randomized bingo board.
