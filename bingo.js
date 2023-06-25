@@ -1,10 +1,9 @@
 "use strict";
+const rows = 5;
+const tiles = rows * rows;
+const median_tile = Math.ceil(tiles / 2);
 const all_players = ['amity', 'chloe', 'alex', 'westy', 'happyeye', 'popa', 'mitty', 'remedy', 'doorknob'];
 const tile = [
-    //'"that\'s going on the tierlist."',
-    //'"<3 heart for you"',
-    //'"what happone?"',
-    //'the ants are mentioned',
     '"anyone still riding the high from winning last night?"',
     '"why are there traps there"',
     '"?" (singular)',
@@ -32,9 +31,13 @@ const tile = [
     'chloe goes to wrong second/rollout side',
     'chloe exasperated sigh',
     'chloe kritz kill',
-    'chloe mentions toes',
     'chloe "thaaat\'s crazy"',
     'chloe "bet"',
+    'chloe *pop-pop-pop*',
+    'chloe *desk boom*',
+    'chloe refers to herself in 3rd person',
+    'chloe messes up rollout',
+    'chloe gets hit by ubersaw',
     'happyeye afk on midfight',
     'happyeye "i\'m clipping that."',
     'happyeye meditates',
@@ -97,15 +100,13 @@ const tile = [
     'remedy sacs while mitty is sacing',
     'remedy "i\'m going nuts"',
 ];
-/**
- * Create a randomized bingo board.
- */
+//Create a randomized bingo board.
 function generate_bingo(players) {
     let tile_pool = create_tile_pool(tile, players);
     let tile_text = '';
-    for (let i = 1; i <= 25; i++) {
+    for (let i = 1; i <= tiles; i++) {
         const chosen_index = Math.floor(Math.random() * tile_pool.length);
-        if (i === 13) {
+        if (i === median_tile) {
             tile_text = "*free space*";
         }
         else {
@@ -116,9 +117,7 @@ function generate_bingo(players) {
         element.innerHTML = tile_text;
     }
 }
-/**
- * Create a pool a valid tiles from the master list, excluding those with unchecked players.
- */
+//Create a pool a valid tiles from the master list, excluding those with unchecked players.
 function create_tile_pool(tile_list, players) {
     let tile_pool = [...tile_list];
     const excluded_players = [...all_players].filter(x => !players.includes(x));
@@ -127,15 +126,13 @@ function create_tile_pool(tile_list, players) {
     }
     return tile_pool;
 }
-/**
- * Flip the state of a tile.
- */
-const tile_state = new Array(25).fill(false);
+//Flip the state of a tile.
+const tile_state = new Array(tiles).fill(false);
 function mark_tile(index) {
-    tile_state[index] = tile_state[index] ? false : true;
+    tile_state[index - 1] = tile_state[index - 1] ? false : true;
     const element = document.getElementById('tile_' + index);
-    element.style.backgroundColor = tile_state[index] ? '#b6eb76' : '#fbfff6';
-    //document.getElementById('tile_'+index).style.backgroundColor = '#b6eb76'
+    element.style.backgroundColor = tile_state[index - 1] ? '#b6eb76' : '#fbfff6';
+    update_num_bingos();
 }
 function get_enabled_players() {
     let players = [];
@@ -147,25 +144,62 @@ function get_enabled_players() {
 }
 function get_num_bingos() {
     let num_bingos = 0;
-    const t = tile_state; //shorthand for readability
-    //there are 12 possible bingos:
-    if (t[0] && t[1] && t[2] && t[3] && t[4])
-        num_bingos++;
+    //calc vertical bingos
+    for (let x = 0; x < rows; x++) {
+        for (let y = 0; y < rows; y++) {
+            const index = (y * rows) + x;
+            if (!tile_state[index])
+                break;
+            if (y === rows - 1)
+                num_bingos++;
+        }
+    }
+    //calc horizontal bingos
+    for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < rows; x++) {
+            const index = (y * rows) + x;
+            if (!tile_state[index])
+                break;
+            if (x === rows - 1)
+                num_bingos++;
+        }
+    }
+    //calc diagonal bingo top-left>bottom-right
+    for (let d = 0; d < rows; d++) {
+        const index = (d * rows) + d;
+        if (!tile_state[index])
+            break;
+        if (d === rows - 1)
+            num_bingos++;
+    }
+    //calc diagonal bingo bottom-left>top-right
+    for (let d = (rows - 1) * rows; d > 0; d -= (rows - 1)) {
+        const index = d;
+        if (!tile_state[index])
+            break;
+        if (d === rows - 1)
+            num_bingos++;
+    }
     return num_bingos;
 }
-/**
- * Refresh the board after applying checkbox states.
- */
+function update_num_bingos() {
+    const num_bingos = get_num_bingos();
+    const element = document.getElementById('num_bingos_text');
+    let num_bingos_text = '';
+    num_bingos_text = num_bingos === 0 ? '' : num_bingos === 1 ? '1 bingo!' : num_bingos + ' bingos!';
+    element.innerHTML = num_bingos_text;
+}
+//Refresh the board after applying checkbox states.
 const refresh = document.querySelector('#refresh');
 refresh.addEventListener('click', (event) => {
     generate_bingo(get_enabled_players()); //generate new bingo
     //toggle all marked tiles
     for (let i = 0; i < 25; i++) {
-        if (i !== 13 && tile_state[i]) {
-            mark_tile(i);
+        if (i !== median_tile - 1 && tile_state[i]) {
+            mark_tile(i + 1);
         }
     }
 });
-//on first run
+//init
 generate_bingo(get_enabled_players());
-mark_tile(13); //center tile starts marked
+mark_tile(median_tile);
