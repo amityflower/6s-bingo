@@ -1,0 +1,29 @@
+#wrapper {
+    display:flex;
+}
+
+#settings {
+    margin: 10px;
+}
+
+.grid-container {
+    width: fit-content;
+    display: grid;
+    grid-template-columns: 150px 150px 150px 150px 150px ;
+    grid-template-rows: 150px 150px 150px 150px 150px ;
+    padding: 5px;
+    gap: 5px;
+    background-color: rgba(120, 186, 196, 0.686);
+}
+
+.grid-item {
+    background-color: #fbfff6;
+    padding: 5px;
+    user-select: none;
+    cursor: pointer;
+}
+
+mark {
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(80, 105, 158);
+}

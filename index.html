@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>bingo</title>
+    <style>
+        html * {
+          font-size: 16px;
+          font-family: Monaco, monospace;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="wrapper">
+        <div class="grid-container">
+            <div class="grid-item" id="tile_1" onclick="mark_tile(1)">1</div>
+            <div class="grid-item" id="tile_2" onclick="mark_tile(2)">2</div>
+            <div class="grid-item" id="tile_3" onclick="mark_tile(3)">3</div>
+            <div class="grid-item" id="tile_4" onclick="mark_tile(4)">4</div>
+            <div class="grid-item" id="tile_5" onclick="mark_tile(5)">5</div>
+            <div class="grid-item" id="tile_6" onclick="mark_tile(6)">6</div>
+            <div class="grid-item" id="tile_7" onclick="mark_tile(7)">7</div>
+            <div class="grid-item" id="tile_8" onclick="mark_tile(8)">8</div>
+            <div class="grid-item" id="tile_9" onclick="mark_tile(9)">9</div>
+            <div class="grid-item" id="tile_10"onclick="mark_tile(10)">10</div>
+            <div class="grid-item" id="tile_11"onclick="mark_tile(11)">11</div>
+            <div class="grid-item" id="tile_12"onclick="mark_tile(12)">12</div>
+            <div class="grid-item" id="tile_13"onclick="mark_tile(13)">13</div>
+            <div class="grid-item" id="tile_14"onclick="mark_tile(14)">14</div>
+            <div class="grid-item" id="tile_15"onclick="mark_tile(15)">15</div>
+            <div class="grid-item" id="tile_16"onclick="mark_tile(16)">16</div>
+            <div class="grid-item" id="tile_17"onclick="mark_tile(17)">17</div>
+            <div class="grid-item" id="tile_18"onclick="mark_tile(18)">18</div>
+            <div class="grid-item" id="tile_19"onclick="mark_tile(19)">19</div>
+            <div class="grid-item" id="tile_20"onclick="mark_tile(20)">20</div>
+            <div class="grid-item" id="tile_21"onclick="mark_tile(21)">21</div>
+            <div class="grid-item" id="tile_22"onclick="mark_tile(22)">22</div>
+            <div class="grid-item" id="tile_23"onclick="mark_tile(23)">23</div>
+            <div class="grid-item" id="tile_24"onclick="mark_tile(24)">24</div>
+            <div class="grid-item" id="tile_25"onclick="mark_tile(25)">25</div>
+        </div>
+        <div id="settings">
+            <form onsubmit="return false">
+                <input type="checkbox" id="p1" name="player" value="alex" checked>
+                <label for="alex"> alex</label><br>
+                <input type="checkbox" id="p2" name="player" value="amity" checked>
+                <label for="amity"> amity</label><br>
+                <input type="checkbox" id="p3" name="player" value="chloe" checked>
+                <label for="chloe"> chloe</label><br>
+                <input type="checkbox" id="p4" name="player" value="happyeye" cunhecked>
+                <label for="happyeye"> happyeye</label><br>
+                <input type="checkbox" id="p5" name="player" value="popa" unchecked>
+                <label for="popa"> popa</label><br>
+                <input type="checkbox" id="p6" name="player" value="westy" unchecked>
+                <label for="westy"> westy</label><br>
+                <input type="checkbox" id="p7" name="player" value="remedy" checked>
+                <label for="remedy"> remedy</label><br>
+                <input type="checkbox" id="p8" name="player" value="mitty" checked>
+                <label for="mitty"> mitty</label><br>
+                <input type="checkbox" id="p9" name="player" value="doorknob" checked>
+                <label for="doorknob"> doorknob</label><br>
+                <button id="refresh">refresh</button>
+            </form>
+        </div>  
+    </div>    
+    <script src="bingo.js"></script>
+  </body>
+</html>
