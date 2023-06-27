@@ -107,6 +107,7 @@ const tile = [
     'remedy "i\'m going nuts"',
     'remedy "fuck it" *bombs*',
     'remedy "on your soldier"',
+    'remedy "fuck that guy"',
 ];
 //Create a randomized bingo board.
 function generate_bingo(players) {

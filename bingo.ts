@@ -106,6 +106,7 @@ const tile: string[] = [
     'remedy "i\'m going nuts"',
     'remedy "fuck it" *bombs*',
     'remedy "on your soldier"',
+    'remedy "fuck that guy"',
 ]
 
 
